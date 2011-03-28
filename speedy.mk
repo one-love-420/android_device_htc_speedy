@@ -19,8 +19,6 @@
 # not specialized for any geography.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
 # The gps config appropriate for this device
 PRODUCT_COPY_FILES += \
     device/htc/speedy/gps.conf:system/etc/gps.conf
@@ -36,19 +34,13 @@ $(call inherit-product-if-exists, vendor/htc/speedy/speedy-vendor.mk)
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.google.clientidbase=android-sprint-us \
-    ro.com.google.clientidbase.am=android-sprint-us \
-    ro.com.google.clientidbase.vs=android-sprint-us \
-    ro.com.google.clientidbase.yt=android-sprint-us \
-    ro.com.google.clientidbase.gmm=android-sprint-us \
-    ro.com.google.locationfeatures=1 \
-    ro.com.google.networklocation=1 \
-    ro.com.google.gmsversion=2.2_r7 \
-    ro.setupwizard.enable_bypass=1 \
-    dalvik.vm.lockprof.threshold=500 \
-    dalvik.vm.dexopt-flags=m=y
-
-PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+	ro.com.google.clientidbase=android-sprint-us \
+	ro.com.google.locationfeatures=1 \
+	ro.cdma.home.operator.numeric=310120 \
+	ro.cdma.home.operator.alpha=Sprint \
+	ro.setupwizard.enable_bypass=1 \
+        dalvik.vm.lockprof.threshold=500 \
+        dalvik.vm.dexopt-flags=m=y
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/speedy/overlay
 
@@ -156,6 +148,3 @@ $(call inherit-product, build/target/product/full_base.mk)
 
 PRODUCT_NAME := htc_speedy
 PRODUCT_DEVICE := speedy
-PRODUCT_MODEL := PG06100
-PRODUCT_MANUFACTURER := HTC
-
