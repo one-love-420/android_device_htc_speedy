@@ -9,16 +9,20 @@ on fs
     mkdir /data 0771 system system
     mkdir /cache 0770 system cache
     mkdir /devlog 0700 root root
+
     mount ext4 /dev/block/mmcblk0p26 /system wait ro data=ordered noauto_da_alloc
     mount ext4 /dev/block/mmcblk0p27 /data wait noatime nosuid nodev data=ordered noauto_da_alloc
     mount ext4 /dev/block/mmcblk0p28 /cache wait noatime nosuid nodev data=ordered noauto_da_alloc
     mount ext4 /dev/block/mmcblk0p31 /devlog wait noatime nosuid nodev data=ordered noauto_da_alloc
 
-
+    #wifi
+    mkdir /data/misc 1771 system misc
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
+
+    #wimax
     mkdir /data/misc/wimax 0770 wimax wimax
     mkdir /data/misc/wimax/sockets 0770  wimax wimax
     mkdir /data/wimax/ 0770  system system
@@ -125,6 +129,7 @@ on property:ro.build.tags=release-keys
 on property:ro.emmc=1
     start rmt_storage
 
+# wimax daemons
 service sequansd /system/bin/sequansd /etc/wimax/sequansd/sequansd_app.xml
     user root
     group root inet
