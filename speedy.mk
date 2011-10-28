@@ -110,7 +110,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/speedy/prebuilt/libcryp98.so:system/lib/libcryp98.so
 
-$(call inherit-product-if-exists, vendor/htc/speedy/speedy-vendor.mk)
+# stuff common to all HTC phones
+$(call inherit-product, device/htc/common/common.mk)
+
+$(call inherit-product, build/target/product/full_base.mk)
 
 # common msm7x30 configs
 $(call inherit-product, device/htc/msm7x30-common/msm7x30.mk)
@@ -121,11 +124,7 @@ $(call inherit-product, device/htc/speedy/media_a1026.mk)
 # htc audio settings
 $(call inherit-product, device/htc/speedy/media_htcaudio.mk)
 
-# stuff common to all HTC phones
-$(call inherit-product, device/htc/common/common.mk)
-
-$(call inherit-product, build/target/product/full_base.mk)
-
+$(call inherit-product-if-exists, vendor/htc/speedy/speedy-vendor.mk)
 
 PRODUCT_NAME := htc_speedy
 PRODUCT_DEVICE := speedy
